@@ -8,6 +8,8 @@ import java.awt.Point;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -52,6 +54,7 @@ public class GameScreen extends JPanel{
 				z=(int)((p.getY()+camZ)*ZOOM);
 				g.drawImage(tile.getImage(), x, z, ZOOM+x, ZOOM+z, 0, 0, IMAGE_SIZE, IMAGE_SIZE, this);
 			}
+			reorderEntityList();
 			for(Entity e : entities){
 				x=(int)((e.getX()-e.getCollideX()+camX)*ZOOM);
 				z=(int)((e.getZ()-e.getCollideZ()+camZ)*ZOOM);
@@ -74,6 +77,15 @@ public class GameScreen extends JPanel{
 				&&OneWish.getPlayingMusic()!=map.getMusic())OneWish.playMusic(map.getMusic());
 			this.map=map;
 		}catch(final Exception exception){ exception.printStackTrace(); }
+	}
+	private void reorderEntityList(){
+		Collections.sort(entities, new Comparator<Entity>(){
+			public int compare(final Entity a, final Entity b){
+				if(a.getZ()==b.getZ())return 0;
+				if(a.getZ()<b.getZ())return -1;
+				return 1;
+			}
+		});
 	}
 	public void render(){ repaint(); }
 	public void addEntity(final Entity... e){ for(Entity a : e)entities.add(a); }

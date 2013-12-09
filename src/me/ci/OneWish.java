@@ -27,7 +27,9 @@ public class OneWish extends JFrame{
 		closeMenu();
 		makePlayer();
 		game.loadMap(Util.loadMap("Test"));
-		game.addEntity(new RandomWalker(250));
+		final IdleNpc npc = new IdleNpc();
+		npc.move(3, 3, Direction.SOUTH, true);
+		game.addEntity(npc);
 		setVisible(true);
 	}
 	private void init(){
