@@ -25,7 +25,7 @@ public class GameScreen extends JPanel{
 	private Map map;
 	public static final int ZOOM = 32;
 	public static final int IMAGE_SIZE = 32;
-	public static final float MOTION_BLUR = 1f;
+	public static final float MOTION_BLUR = 0f;
 	public GameScreen(){
 		new Timer().schedule(new TimerTask(){
 			public void run(){ repaint(); }
@@ -63,7 +63,7 @@ public class GameScreen extends JPanel{
 			g.dispose();
 			final Graphics2D g2 = (Graphics2D)g1;
 			g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-			g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, MOTION_BLUR));
+			g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f-MOTION_BLUR));
 			g2.drawImage(img, 0, 0, getWidth(), getHeight(), 0, 0, width, height, this);
 			g2.dispose();
 		}catch(final Exception exception){ exception.printStackTrace(); }
