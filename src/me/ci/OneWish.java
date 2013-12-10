@@ -22,14 +22,17 @@ public class OneWish extends JFrame{
 		game=new GameScreen();
 		game.addMouseListener(new MouseAdapter(){
 			@Override
-			public void mouseClicked(final MouseEvent e){ player.pathFindTo(e.getX()/GameScreen.ZOOM-1, e.getY()/GameScreen.ZOOM-1); }
+			public void mouseClicked(final MouseEvent e){
+				for(Entity a : game.getEntities())a.pathFindTo(e.getX()/GameScreen.ZOOM-1, e.getY()/GameScreen.ZOOM-1);
+			}
 		});
 		closeMenu();
 		makePlayer();
 		game.loadMap(Util.loadMap("Test"));
-		final IdleNpc npc = new IdleNpc(true);
-		npc.move(3, 3, Direction.SOUTH, true);
-		game.addEntity(npc);
+		game.addEntity(new RandomWalker(250));
+		game.addEntity(new RandomWalker(250));
+		game.addEntity(new RandomWalker(250));
+		game.addEntity(new RandomWalker(250));
 		setVisible(true);
 	}
 	private void init(){

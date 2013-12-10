@@ -93,4 +93,5 @@ public class GameScreen extends JPanel{
 	public boolean isFollowingPlayer(){ return followplayer; }
 	public void setFollowPlayer(final boolean follow){ followplayer=follow; }
 	public Tile getTileAt(final int x, final int z){ return tiles.get(new Point(x, z)); }
+	public ArrayList<Entity> getEntities(){ return entities; }
 }
